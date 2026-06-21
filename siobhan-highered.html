@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Success, Advising & Institutional Change — Siobhan Greatorex-Voith</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #1a1a1a;
+      --warm:      #f7f5f1;
+      --slate:     #586270;
+      --accent:    #2d6a7f;
+      --accent-lt: #c8dfe8;
+      --rule:      #dedad3;
+      --white:     #ffffff;
+      --serif:     'Libre Baskerville', Georgia, serif;
+      --sans:      'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      font-weight: 300;
+      color: var(--ink);
+      background: var(--white);
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 4rem;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-back {
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--accent); text-decoration: none;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .nav-back:hover { opacity: 0.75; }
+
+    #hero {
+      min-height: 55vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 9rem 4rem 5rem;
+      max-width: 860px;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1rem; display: block;
+    }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 3vw, 2.6rem);
+      line-height: 1.2; margin-bottom: 1.4rem;
+    }
+    .hero-lede {
+      font-size: 1.05rem; color: var(--slate);
+      max-width: 600px; line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      display: inline-block; padding: 0.7rem 1.5rem;
+      font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.05em; text-decoration: none;
+      border-radius: 2px; transition: all 0.2s;
+    }
+    .btn-primary { background: var(--accent); color: var(--white); }
+    .btn-primary:hover { background: #235a6c; }
+
+    section { padding: 5.5rem 4rem; }
+    section:nth-child(even) { background: var(--warm); }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.6rem; display: block;
+    }
+    .section-heading {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+      line-height: 1.25; margin-bottom: 1rem;
+    }
+    .section-intro {
+      font-size: 0.95rem; color: var(--slate);
+      max-width: 680px; line-height: 1.8;
+      margin-bottom: 2.4rem;
+    }
+    .section-rule {
+      width: 2.4rem; height: 2px;
+      background: var(--accent-lt); margin-bottom: 2.4rem;
+    }
+
+    /* Entry blocks */
+    .entry { margin-bottom: 2.8rem; }
+    .entry:last-child { margin-bottom: 0; }
+    .entry-heading {
+      font-family: var(--serif);
+      font-size: 1.05rem; margin-bottom: 0.75rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--accent-lt);
+    }
+    .entry p { font-size: 0.9rem; color: var(--slate); line-height: 1.75; margin-bottom: 0.8rem; }
+    .entry p:last-child { margin-bottom: 0; }
+
+    /* Course list */
+    .course { margin-bottom: 1.6rem; padding-left: 1.2rem; border-left: 2px solid var(--accent-lt); }
+    .course-title { font-weight: 500; font-size: 0.9rem; margin-bottom: 0.4rem; display: block; }
+    .course p { font-size: 0.87rem; color: var(--slate); line-height: 1.7; margin-bottom: 0; }
+
+    /* Design notes */
+    .design-list { list-style: none; }
+    .design-list li {
+      font-size: 0.87rem; color: var(--slate);
+      padding: 0.5rem 0 0.5rem 1.2rem;
+      border-bottom: 1px solid var(--rule);
+      position: relative; line-height: 1.6;
+    }
+    .design-list li::before {
+      content: '—';
+      position: absolute; left: 0;
+      color: var(--accent-lt);
+    }
+    .design-list li:last-child { border-bottom: none; }
+
+    /* Quotes */
+    .quotes { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+    .quote {
+      padding: 1.2rem 1.4rem;
+      border-left: 3px solid var(--accent-lt);
+      background: var(--white);
+    }
+    .quote p { font-size: 0.87rem; color: var(--slate); font-style: italic; line-height: 1.65; margin-bottom: 0.4rem; }
+    .quote cite { font-size: 0.74rem; color: var(--accent); font-style: normal; font-weight: 600; }
+
+    /* Awards */
+    .award-list { list-style: none; }
+    .award-list li {
+      font-size: 0.87rem; color: var(--slate);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.5;
+    }
+    .award-list li:last-child { border-bottom: none; }
+
+    /* Institutional service */
+    .service-list { list-style: none; }
+    .service-list li {
+      font-size: 0.87rem; color: var(--slate);
+      padding: 0.6rem 0 0.6rem 1.2rem;
+      border-bottom: 1px solid var(--rule);
+      position: relative; line-height: 1.6;
+    }
+    .service-list li::before {
+      content: '—';
+      position: absolute; left: 0;
+      color: var(--accent-lt);
+    }
+    .service-list li:last-child { border-bottom: none; }
+
+    /* Contact */
+    #contact { background: #1a2830; color: var(--white); }
+    #contact .section-label { color: var(--accent-lt); }
+    #contact .section-heading { color: var(--white); }
+    #contact .section-rule { background: var(--accent); opacity: 0.4; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .contact-body { color: #9fb0bb; line-height: 1.8; }
+    .contact-body p { margin-bottom: 1rem; }
+    .contact-body a { color: var(--accent-lt); text-decoration: none; }
+    .contact-links { margin-top: 1.8rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.7rem;
+      color: var(--accent-lt); text-decoration: none;
+      font-size: 0.87rem; transition: opacity 0.2s;
+    }
+    .contact-link:hover { opacity: 0.7; }
+    .contact-link-icon { opacity: 0.5; width: 1rem; text-align: center; font-size: 0.85rem; }
+    .open-to { padding: 1.8rem; border: 1px solid rgba(255,255,255,0.08); border-radius: 3px; }
+    .open-to-label {
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent-lt); margin-bottom: 1.1rem; display: block;
+    }
+    .open-to-item {
+      display: flex; align-items: flex-start; gap: 0.7rem;
+      margin-bottom: 0.8rem; font-size: 0.85rem;
+      color: #b8c8d0; line-height: 1.5;
+    }
+    .open-to-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent-lt); flex-shrink: 0; margin-top: 0.5rem;
+    }
+
+    footer { background: #111; color: #555; text-align: center; padding: 1.4rem; font-size: 0.76rem; }
+
+    @media (max-width: 860px) {
+      nav { padding: 1rem 1.5rem; }
+      #hero { padding: 7rem 1.5rem 3rem; }
+      section { padding: 4rem 1.5rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="siobhan-site.html" class="nav-name">Siobhan Greatorex-Voith</a>
+  <a href="siobhan-site.html" class="nav-back">← Main profile</a>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <span class="hero-eyebrow">Student Development · Advising · Teaching</span>
+  <h1 class="hero-name">Student Success, Advising<br>& Institutional Change</h1>
+  <p class="hero-lede">The same question that drives my research drives my work with students: who is being missed, and what does the institution need to change in order to serve them? I've spent over a decade advising, teaching, and building community at Harvard — working at the intersection of equity, student success, and residential life, with a particular focus on first-generation and low-income students navigating institutions that weren't designed with them in mind.</p>
+  <a href="#contact" class="btn btn-primary">Get in touch</a>
+</div>
+
+<!-- STUDENT SUCCESS -->
+<section id="student-success">
+  <div class="section-inner">
+    <span class="section-label">Student Success & Residential Life</span>
+    <h2 class="section-heading">Building community and navigating institutions</h2>
+    <div class="section-rule"></div>
+    <p class="section-intro">Much of my most sustained work has been grounded in a simple observation: elite institutions carry unwritten rules, cultural expectations, and hidden curricula that some students inherit and others have to discover on their own — often at significant cost. I've spent over a decade trying to make those things visible and navigable, both for individual students and through the programs and structures I've helped create.</p>
+
+    <div class="entry">
+      <h3 class="entry-heading">Founding Stanford's First Generation Program</h3>
+      <p>My first professional role in student affairs was as Director of the First Generation Program at Stanford — an early institutional initiative I founded that informed the development of what is now Stanford's First-Generation and Low-Income Student Success Center.</p>
+      <p>The work was grounded in evidence from the start. I conducted surveys, focus groups, and peer-institution benchmarking to map the barriers affecting students' academic transitions, financial navigation, and sense of belonging. I drew on social-belonging research to frame the problems and design the interventions, and synthesized findings into a 100+ page report with concrete recommendations for university leadership. I hired and supervised nine temporary staff to implement a week-long orientation program for incoming FLI students as part of New Student Orientation, and developed materials for students and their families that were later adopted by peer institutions. The program also included diversity training for student affairs staff and coordinated support for students navigating academic, financial, and personal crises.</p>
+      <p>What I learned in that role — that you cannot design for students you haven't actually listened to, and that belonging is not a soft outcome but a structural one — has shaped everything I've done since.</p>
+    </div>
+
+    <div class="entry">
+      <h3 class="entry-heading">Residential Advising — Eliot House, Harvard University (2014–present)</h3>
+      <p>As a live-in Resident Tutor and Officer of Harvard College, I've provided holistic academic, personal, and pre-professional advising to a residential community of approximately 450 undergraduates annually — including academic planning, fellowship advising, career guidance, and support through personal and family crises. The role includes on-call crisis response: responding to medical and mental health emergencies, coordinating with HUHS, CAMHS, HUPD, and the Dean of Students Office, and providing first-response support and follow-through for students in acute distress.</p>
+      <p>Advising roles across my tenure have included Sophomore Academic Advising (2014–2023), Fellowships Advising (2014–2016), Diversity, Inclusion & Belonging Advising (2017–2024), and Culture & Community Advising (2025–present).</p>
+      <p>I developed and led an Equity, Diversity, Inclusion & Belonging initiative focused on strengthening support for first-generation and low-income students, increasing cross-class dialogue, and improving accessibility within the house community — designing approximately 10 FLI-focused programs annually including financial literacy workshops, career panels, faculty navigation sessions, identity-affirming gatherings, and community-building events. This work was recognized with the Alan Heimert and Arline Grimes Award in 2021, 2022, and 2023.</p>
+    </div>
+
+    <div class="entry">
+      <h3 class="entry-heading">Class Diversity Series, Eliot House (2017–2020)</h3>
+      <p>The Class Diversity Series was a year-long co-curricular program I designed and ran for the full Eliot House community, grounded in the scholarship on social class, cultural capital, and belonging in elite institutional contexts. It was deliberately open to all students — including legacy students — because the richest conversations about class happen across class lines, not within them.</p>
+      <p>Each semester combined community-building events, faculty and practitioner panels, and structured dialogue on topics drawn directly from the research: the hidden curriculum of academic life, the cultural mismatch between first-generation students and elite institutional norms, the unwritten rules of professional settings, financial planning and career navigation, and the psychological costs of upward mobility. Programming included faculty panels on navigating office hours, recommendation letters, and academic relationships with Harvard Faculty Dean Doug Melton; a formal dinner etiquette practicum; fellowships navigation; financial literacy workshops; career demystification in consulting, finance, and public service; a dinner with Tony Jack, author of The Privileged Poor, whose research began in Eliot House itself; book discussions of Unequal Childhoods and The Privileged Poor; and community conversations on navigating the distance between home and Harvard.</p>
+      <p>What made it distinctive was not just the programming but the design: a sustained, semester-long curriculum rather than a series of one-off events, grounded in actual scholarship, and structured so that the cross-class conversation was genuinely mixed. Students came — including legacy students — and the conversations were richer for it.</p>
+    </div>
+
+    <div class="entry">
+      <h3 class="entry-heading">Stanford First-Generation and Low-Income Alumni Network (2021–present)</h3>
+      <p>As a volunteer leader with Stanford's FLAN since 2021, I've supported first-generation and low-income Stanford alumni through programming, community-building, and organizational development — serving as Co-Lead of the Community Building Committee, then Co-Lead of the Education & Enrichment Committee, then Vice President of Operations, and Co-President since 2024. During that time I've helped build the organization's operational and governance infrastructure, including strategic planning processes, financial oversight systems, and needs assessment and evaluation practices, supporting programming for more than 2,000 alumni. FLAN also includes student-facing transition programming at key lifecycle moments.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ADVISING -->
+<section id="advising">
+  <div class="section-inner">
+    <span class="section-label">Advising, Mentorship & Intellectual Development</span>
+    <h2 class="section-heading">Advising, mentorship, and intellectual development</h2>
+    <div class="section-rule"></div>
+    <p class="section-intro">A thread running through my work across all contexts is helping students learn to think and work rigorously — not just consume knowledge. Whether guiding an independent research project from question to publication, advising a senior thesis, teaching a section on how to construct a literature review, or supporting a student through the unwritten expectations of a fellowship application, I've spent years developing students' capacity to do original intellectual work across disciplines and career stages.</p>
+
+    <div class="entry">
+      <h3 class="entry-heading">Residential Academic Advising</h3>
+      <p>As a Sophomore Academic Advisor at Eliot House (2014–2023), I advised students on concentration selection, academic planning, research opportunities, fellowships, and post-graduate pathways. I also provided Fellowships Advising (2014–2016), supporting students through the unspoken expectations and application dynamics of competitive national fellowships. Twice nominated for the Excellence in Academic Advising Award; awarded the Star Family Prize for Excellence in Advising in 2022.</p>
+    </div>
+
+    <div class="entry">
+      <h3 class="entry-heading">Undergraduate Thesis Advising</h3>
+      <p>I've served as primary advisor for four Harvard College senior honors theses in Sociology and Social Studies, each involving year-long mixed-methods research projects. All four advisees secured Harvard College research funding; multiple theses were nominated for departmental awards. I've also evaluated ten additional senior theses as a departmental reader, providing detailed written feedback and administering oral exams.</p>
+      <p>As a formal Concentration Advisor in the Harvard Sociology Department (2015–2017), I advised 94 undergraduate students across two academic years on course selection, thesis planning, and graduate and professional pathways.</p>
+    </div>
+
+    <div class="entry">
+      <h3 class="entry-heading">Formal Research and Writing Advising Roles</h3>
+      <p>As Qualitative Methods Advisor in the Harvard Sociology Department (Spring 2025), I supported prospective thesis writers in research design, interview methods, IRB preparation, and grant applications. As a Writing Fellow at Harvard's Writing Center (Spring 2025), I provided one-on-one support to undergraduate and graduate students across disciplines, working with nine senior thesis writers on argument structure, prose, and substantive revision.</p>
+    </div>
+
+    <div class="entry">
+      <h3 class="entry-heading">Independent Research Mentorship</h3>
+      <p>Through Lumiere Education and Polygence, I've guided more than 44 students through full independent research cycles — from initial question through final paper — with many going on to publish or present their work. Projects have ranged across psychology, sociology, anthropology, and adjacent fields. I've also advised students on topic refinement, prepared students for conference presentations, and served as a judge at student research symposia.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- TEACHING -->
+<section id="teaching">
+  <div class="section-inner">
+    <span class="section-label">Teaching</span>
+    <h2 class="section-heading">Teaching across disciplines, levels, and formats</h2>
+    <div class="section-rule"></div>
+    <p class="section-intro">I've taught across Psychology, Sociology, and General Education at Harvard over nearly a decade, working with faculty including Daniel Gilbert, Jason Mitchell, and Steven Pinker, across large lectures, discussion sections, hybrid delivery, and fully asynchronous online courses. My average teaching evaluation is 4.8/5.0 at Harvard Extension School and 4.7/5.0 across Harvard College courses.</p>
+
+    <div class="entry">
+      <h3 class="entry-heading">Courses</h3>
+      <div class="course">
+        <span class="course-title">Introduction to Psychological Science, Harvard University (2019–2024)</span>
+        <p>Head Teaching Fellow and Teaching Fellow across 9 semesters for a foundational course enrolling 100–450 students, with 13–25 sections per semester. Managed and mentored teaching teams of 5–13 TFs per term. Designed and taught lessons on reading empirical articles, constructing literature reviews, and writing original research papers in research-intensive versions of the course.</p>
+      </div>
+      <div class="course">
+        <span class="course-title">Science of Happiness, Harvard College and Harvard Division of Continuing Education (2025–2026)</span>
+        <p>Taught and facilitated discussion-based and applied learning for undergraduates in the Harvard College offering. Served as sole instructional lead for the Extension School offering, managing implementation for 50–75 graduate students and midcareer learners. Redesigned for hybrid delivery and led full conversion to asynchronous, developing modular learning pathways, self-paced assessments, and course infrastructure from scratch. Average student evaluation of 4.8/5.0.</p>
+      </div>
+      <div class="course">
+        <span class="course-title">Philanthropy, the Nonprofit Sector, and the Social Good, Harvard College (2026)</span>
+        <p>Instructor for Harvard's General Education course on philanthropy and nonprofit organizations. Led sections and worked directly with students on nonprofit evaluation, theory of change assessment, and funding recommendations through the Philanthropy Lab.</p>
+      </div>
+      <div class="course">
+        <span class="course-title">Introduction to Social Inequality and Media and Popular Culture, Harvard University (2016–2017)</span>
+        <p>Teaching Fellow for undergraduate Sociology courses. Provided scaffolded instruction on literature review writing, sociological argument, and evidence-based analysis.</p>
+      </div>
+      <div class="course" style="border-bottom: none; margin-bottom: 0;">
+        <span class="course-title">Guest Lectures — Edge Education and Cambridge Humanities Group (2018–2024)</span>
+        <p>Delivered multi-day lecture series to approximately 800 middle school, high school, and graduate students on organizational behavior, cross-cultural communication, and social science frameworks.</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <h3 class="entry-heading">Instructional Design</h3>
+      <ul class="design-list">
+        <li>Led full conversion of Science of Happiness to asynchronous delivery, developing all modular learning pathways, assessments, and course infrastructure.</li>
+        <li>Designed assessment rubrics and learning activities that help learners translate empirical research into behavior-change interventions and evidence-based recommendations.</li>
+        <li>Developed onboarding systems for teaching teams and grading workflows that reduced grade turnaround time by 50% across large courses.</li>
+        <li>Completed formal pedagogy training through Harvard's Derek Bok Center for Teaching and Learning (Spring 2023), including seminars on inclusive pedagogy and antiracist teaching practice.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <h3 class="entry-heading">What students say</h3>
+      <div class="quotes">
+        <div class="quote">
+          <p>"Siobhan was hands down the best TF I have had at this institution. I have never been a part of sections where there has been so much excitement to speak up and participate and this was a function of Siobhan's influence over the room. Her knowledge of outside research on these topics was a tremendous help and never once did I hear Siobhan not able to provide some form of academic inquiry or research into a topic that a student brought up."</p>
+          <cite>Harvard College student, Introduction to Psychological Science</cite>
+        </div>
+        <div class="quote">
+          <p>"For the first time in my life, when it was desperately needed, and without me asking, this Teaching Fellow was intuitive, attentive, extremely helpful, kind, and likely saved my ability to continue in the course through challenges on my end."</p>
+          <cite>Harvard Extension School student, Science of Happiness</cite>
+        </div>
+        <div class="quote">
+          <p>"She created an environment wherein we were able to critically engage with psychological theories and topics while applying them to real world challenges. Really helped reshape the way I think about the world around me."</p>
+          <cite>Harvard College student, Introduction to Psychological Science</cite>
+        </div>
+        <div class="quote">
+          <p>"Siobhan was so so so good. She never lets us know what she thinks but really encourages us to think about both sides of everything we discuss. She was one of the best TFs I've had."</p>
+          <cite>Harvard College student, Philanthropy, the Nonprofit Sector, and the Social Good</cite>
+        </div>
+        <div class="quote">
+          <p>"She gave me the tools to think critically about sociological work having never before taken a sociology class."</p>
+          <cite>Harvard College student, Introduction to Social Inequality</cite>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <h3 class="entry-heading">Teaching Awards</h3>
+      <ul class="award-list">
+        <li>Harvard Distinction in Teaching Award, Derek Bok Center — awarded six times before the program was phased out (2017, 2019–2022)</li>
+        <li>Star Family Prize for Excellence in Advising, Derek Bok Center — 2022</li>
+        <li>Nominee, Excellence in Academic Advising Award — 2023</li>
+        <li>Alan Heimert and Arline Grimes Award, Eliot House — 2021, 2022, 2023</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- INSTITUTIONAL SERVICE -->
+<section id="service">
+  <div class="section-inner">
+    <span class="section-label">Institutional Service</span>
+    <h2 class="section-heading">Institutional contributions</h2>
+    <div class="section-rule"></div>
+    <ul class="service-list">
+      <li>Member, Faculty Dean Search Advisory Committee, Eliot House, Harvard University (2020)</li>
+      <li>Co-author, Harvard Sociology Department Doctoral Advising Conversation Guide (2020), produced through the Working Group on Advising and adopted by the Graduate School of Arts and Sciences and peer institutions</li>
+      <li>Graduate Student Representative, Committee on Undergraduate Degrees, Sociology Department, Harvard University (2016–2017)</li>
+      <li>Co-President (and prior board roles since 2021), Stanford First-Generation and Low-Income Alumni Network</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <span class="section-label">Contact</span>
+    <h2 class="section-heading">Let's talk</h2>
+    <div class="section-rule"></div>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-body">
+          <p>I'm interested in roles at the intersection of student success, equity, and institutional strategy in higher education. My background spans residential advising, equity programming, academic advising, research mentorship, and program-building — and I'm drawn to roles where those things come together in service of students who are navigating institutions that weren't built with them in mind.</p>
+          <p>I'm open to roles across student affairs, advising, and institutional strategy. The combination of direct student-facing experience and a research and evaluation background means I'm well suited to roles that require both — whether that's designing programs, building systems, or using data to understand how well students are being served.</p>
+          <p>The best way to reach me is by email. For my research, evaluation, and strategy work, see my <a href="siobhan-site.html">main profile</a>.</p>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:siobhan.greatorexvoith@gmail.com" class="contact-link">
+            <span class="contact-link-icon">✉</span>
+            siobhan.greatorexvoith@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/siobhangreatorex" class="contact-link" target="_blank">
+            <span class="contact-link-icon" style="font-weight:700; font-size:0.75rem;">in</span>
+            linkedin.com/in/siobhangreatorex
+          </a>
+        </div>
+      </div>
+      <div class="open-to">
+        <span class="open-to-label">Currently open to</span>
+        <div class="open-to-item"><span class="open-to-dot"></span>Director or Associate Director roles in residential life, residential education, or student success</div>
+        <div class="open-to-item"><span class="open-to-dot"></span>Director of first-generation and low-income student programs</div>
+        <div class="open-to-item"><span class="open-to-dot"></span>Dean of Students-adjacent roles, including Associate Dean and Residential Dean positions</div>
+        <div class="open-to-item"><span class="open-to-dot"></span>Senior advising and academic affairs leadership</div>
+        <div class="open-to-item"><span class="open-to-dot"></span>Student affairs assessment, strategy, and institutional research roles focused on student outcomes</div>
+        <div class="open-to-item"><span class="open-to-dot"></span>Equity, belonging, and culture and community leadership in higher education</div>
+        <div class="open-to-item"><span class="open-to-dot"></span>Consulting engagements in student success and institutional equity</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Siobhan Greatorex-Voith &nbsp;·&nbsp; Cambridge, MA</p>
+</footer>
+
+</body>
+</html>

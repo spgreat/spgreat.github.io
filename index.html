@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Siobhan Greatorex-Voith — Research, Evaluation & Strategy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #1a1a1a;
+      --warm:      #f7f5f1;
+      --slate:     #586270;
+      --accent:    #2d6a7f;
+      --accent-lt: #c8dfe8;
+      --rule:      #dedad3;
+      --white:     #ffffff;
+      --serif:     'Libre Baskerville', Georgia, serif;
+      --sans:      'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      font-weight: 300;
+      color: var(--ink);
+      background: var(--white);
+      font-size: 17px;
+      line-height: 1.75;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 4rem;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-name {
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--slate); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 9rem 4rem 5rem;
+      max-width: 860px;
+    }
+    .hero-thesis {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+      line-height: 1.25;
+      font-style: italic;
+      color: var(--ink);
+      margin-bottom: 2rem;
+      max-width: 700px;
+    }
+    .hero-byline {
+      display: flex; align-items: center; gap: 1.2rem;
+      margin-bottom: 1.6rem;
+    }
+    .hero-byline-rule {
+      width: 2.5rem; height: 2px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .hero-name-block {}
+    .hero-name {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      display: block;
+    }
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .hero-lede {
+      font-size: 1.05rem;
+      color: var(--slate);
+      max-width: 600px;
+      line-height: 1.8;
+      margin-bottom: 2.4rem;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 0.7rem 1.5rem;
+      font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.05em; text-decoration: none;
+      border-radius: 2px; transition: all 0.2s;
+    }
+    .btn-primary { background: var(--accent); color: var(--white); }
+    .btn-primary:hover { background: #235a6c; }
+    .btn-outline { border: 1px solid var(--rule); color: var(--slate); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SECTIONS ── */
+    section { padding: 6rem 4rem; }
+    section:nth-child(even) { background: var(--warm); }
+    .section-inner { max-width: 1040px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.6rem;
+      display: block;
+    }
+    .section-heading {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+      line-height: 1.25; margin-bottom: 2.4rem;
+    }
+    .section-rule {
+      width: 2.4rem; height: 2px;
+      background: var(--accent-lt); margin-bottom: 2.4rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid; grid-template-columns: 3fr 2fr;
+      gap: 4.5rem; align-items: start;
+    }
+    .about-body p { color: var(--slate); margin-bottom: 1.15rem; }
+    .about-body p:last-child { margin-bottom: 0; }
+
+    .sidebar-block { margin-bottom: 2rem; }
+    .sidebar-label {
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ink); margin-bottom: 0.65rem; display: block;
+    }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      font-size: 0.76rem; padding: 0.25rem 0.65rem;
+      background: var(--white); border: 1px solid var(--rule);
+      border-radius: 2px; color: var(--slate);
+    }
+    section:nth-child(even) .tag { background: var(--warm); }
+    .edu-list { list-style: none; }
+    .edu-list li {
+      font-size: 0.84rem; color: var(--slate);
+      padding: 0.35rem 0;
+      border-bottom: 1px solid var(--rule);
+      line-height: 1.4;
+    }
+    .edu-list li:last-child { border-bottom: none; }
+
+    /* ── WORK CARDS ── */
+    .work-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem;
+    }
+    .work-card {
+      padding: 1.8rem; border: 1px solid var(--rule);
+      background: var(--white); border-radius: 3px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .work-card:hover {
+      border-color: var(--accent-lt);
+      box-shadow: 0 4px 20px rgba(45,106,127,0.07);
+    }
+    .card-eyebrow {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.11em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.5rem; display: block;
+    }
+    .work-card h3 {
+      font-family: var(--serif);
+      font-size: 0.98rem; margin-bottom: 0.75rem; line-height: 1.3;
+    }
+    .work-card p { font-size: 0.87rem; color: var(--slate); line-height: 1.7; }
+
+    /* ── MENTORSHIP ── */
+    .mentorship-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    }
+    .mentorship-block h3 {
+      font-family: var(--serif);
+      font-size: 1rem; margin-bottom: 0.75rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--accent-lt);
+    }
+    .mentorship-block p { font-size: 0.9rem; color: var(--slate); line-height: 1.75; }
+
+    /* ── EXPERTISE ── */
+    .expertise-featured {
+      padding: 2rem;
+      background: var(--accent);
+      color: var(--white);
+      border-radius: 3px;
+      margin-bottom: 1.6rem;
+    }
+    .expertise-featured h3 {
+      font-family: var(--serif);
+      font-size: 1.1rem; margin-bottom: 0.65rem;
+      color: var(--white);
+    }
+    .expertise-featured p { font-size: 0.9rem; color: rgba(255,255,255,0.85); line-height: 1.72; }
+    .expertise-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    }
+    .expertise-item {
+      padding: 1.8rem 1.8rem 1.8rem 0;
+      border-top: 2px solid var(--accent-lt);
+      margin-right: 1.8rem;
+    }
+    .expertise-item:nth-child(3n) { margin-right: 0; padding-right: 0; }
+    .expertise-item h3 {
+      font-family: var(--serif);
+      font-size: 0.96rem; margin-bottom: 0.6rem;
+    }
+    .expertise-item p { font-size: 0.85rem; color: var(--slate); line-height: 1.7; }
+
+    /* ── RESEARCH ── */
+    .research-cluster { margin-bottom: 3rem; }
+    .research-cluster:last-child { margin-bottom: 0; }
+    .research-cluster-heading {
+      font-family: var(--serif);
+      font-size: 1rem; margin-bottom: 0.5rem;
+    }
+    .research-cluster-intro {
+      font-size: 0.87rem; color: var(--slate);
+      margin-bottom: 1.2rem; line-height: 1.7;
+    }
+    .pub-list { display: flex; flex-direction: column; gap: 0.8rem; }
+    .pub-item {
+      padding: 1rem 1.2rem;
+      border-left: 3px solid var(--accent-lt);
+      background: var(--white);
+    }
+    .pub-item p {
+      font-size: 0.87rem; color: var(--slate);
+      font-style: italic; margin-bottom: 0.25rem;
+      line-height: 1.5;
+    }
+    .pub-item .pub-venue {
+      font-size: 0.74rem; color: var(--accent);
+      font-style: normal; font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: #1a2830; color: var(--white); }
+    #contact .section-label { color: var(--accent-lt); }
+    #contact .section-heading { color: var(--white); }
+    #contact .section-rule { background: var(--accent); opacity: 0.4; }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    }
+    .contact-body { color: #9fb0bb; line-height: 1.8; }
+    .contact-body p { margin-bottom: 1rem; }
+    .contact-body a {
+      color: var(--accent-lt); text-decoration: none;
+    }
+    .contact-body a:hover { opacity: 0.75; }
+    .contact-links { margin-top: 1.8rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.7rem;
+      color: var(--accent-lt); text-decoration: none;
+      font-size: 0.87rem; transition: opacity 0.2s;
+    }
+    .contact-link:hover { opacity: 0.7; }
+    .contact-link-icon { opacity: 0.5; width: 1rem; text-align: center; font-size: 0.85rem; }
+    .open-to {
+      padding: 1.8rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 3px;
+    }
+    .open-to-label {
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent-lt); margin-bottom: 1.1rem; display: block;
+    }
+    .open-to-item {
+      display: flex; align-items: flex-start; gap: 0.7rem;
+      margin-bottom: 0.8rem; font-size: 0.85rem;
+      color: #b8c8d0; line-height: 1.5;
+    }
+    .open-to-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent-lt); flex-shrink: 0; margin-top: 0.5rem;
+    }
+
+    footer {
+      background: #111; color: #555;
+      text-align: center; padding: 1.4rem;
+      font-size: 0.76rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero { padding: 7rem 1.5rem 3rem; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid, .work-grid, .mentorship-grid,
+      .expertise-grid, .contact-grid {
+        grid-template-columns: 1fr; gap: 2rem;
+      }
+      .expertise-item { margin-right: 0; padding-right: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-name">Siobhan Greatorex-Voith</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#mentorship">Mentorship</a></li>
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <p class="hero-thesis">"Most evaluations stop at the average effect. I'm interested in where the average falls short."</p>
+  <div class="hero-byline">
+    <div class="hero-byline-rule"></div>
+    <div class="hero-name-block">
+      <span class="hero-name">Siobhan Greatorex-Voith</span>
+      <span class="hero-eyebrow">Research · Evaluation · Strategy</span>
+    </div>
+  </div>
+  <p class="hero-lede">
+    Which populations does a program miss? What unintended consequences does it produce? And what needs to change in order to act on what the evidence shows? I've spent my career applying that lens to questions of education, opportunity, and the systems that shape people's life trajectories.
+  </p>
+  <div class="hero-cta">
+    <a href="#work" class="btn btn-primary">See my work</a>
+    <a href="#contact" class="btn btn-outline">Get in touch</a>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <span class="section-label">About</span>
+    <h2 class="section-heading">Interdisciplinary by design, rigorous by commitment</h2>
+    <div class="section-rule"></div>
+    <div class="about-grid">
+      <div class="about-body">
+        <p>My background resists easy categorization, which I've come to think is a feature rather than a bug. I hold a BS in Symbolic Systems — Stanford's interdisciplinary program spanning cognitive science, linguistics, computer science, and philosophy — alongside a BA in Comparative Studies in Race and Ethnicity. After Stanford I spent several years doing substantive work before doctoral study: founding what became Stanford's First-Generation and Low-Income Student Success Center, working in college access and nonprofit organizations, and collaborating on research at the intersection of economics and education policy. I then went on to doctoral work in Sociology at Harvard, where I've worked alongside social and cognitive psychologists, industrial-organizational psychologists, biodemographers, and social-science geneticists.</p>
+        <p>The throughline across all of it is a specific set of questions: where does the average effect fall short? Which populations does a program miss? Who experiences unintended consequences, and why? I care about getting this right because average effects can mask real harm, and the people most likely to be missed are usually the ones with the least margin for error. At its core, my work is about helping people and organizations make better decisions with imperfect information.</p>
+        <p>Much of my work has focused on education and social mobility: college access, student success, the psychosocial costs of moving between social worlds, and the institutional environments that shape whether people thrive or struggle. But the methods and frameworks I use travel well, and I'm drawn to any context where evidence can meaningfully improve how resources and opportunities are directed.</p>
+        <p>I thrive on variety and collaboration — I've always had many things running at once and I do my best work that way. What I'm looking for now is a role that offers that richness within a single organizational home, rather than across multiple simultaneous appointments.</p>
+      </div>
+      <div class="about-sidebar">
+        <div class="sidebar-block">
+          <span class="sidebar-label">Methods & Skills</span>
+          <div class="tag-list">
+            <span class="tag">Quantitative Methods</span>
+            <span class="tag">Qualitative Methods</span>
+            <span class="tag">Research Design</span>
+            <span class="tag">Program Evaluation</span>
+            <span class="tag">Causal Inference</span>
+            <span class="tag">Survey Design</span>
+            <span class="tag">Focus Groups & Cognitive Interviewing</span>
+            <span class="tag">Machine Learning</span>
+            <span class="tag">Spatial Analysis</span>
+            <span class="tag">Systems Thinking</span>
+            <span class="tag">Strategy</span>
+            <span class="tag">Project Management</span>
+            <span class="tag">Organizational Design</span>
+          </div>
+        </div>
+        <div class="sidebar-block">
+          <span class="sidebar-label">Affiliations</span>
+          <ul class="edu-list">
+            <li>Graduate Affiliate, Institute for Quantitative Social Science (IQSS), Harvard University</li>
+            <li>Graduate Affiliate, Harvard Center for Population and Development Studies</li>
+          </ul>
+        </div>
+        <div class="sidebar-block">
+          <span class="sidebar-label">Domains</span>
+          <div class="tag-list">
+            <span class="tag">Education & College Access</span>
+            <span class="tag">Social Mobility</span>
+            <span class="tag">Health & Well-being</span>
+            <span class="tag">Philanthropy & Nonprofit Strategy</span>
+            <span class="tag">Public Policy</span>
+          </div>
+        </div>
+        <div class="sidebar-block">
+          <span class="sidebar-label">Education</span>
+          <ul class="edu-list">
+            <li>PhD in Sociology, Harvard University (expected 2027)</li>
+            <li>MA in Sociology, Harvard University</li>
+            <li>BS in Symbolic Systems, Stanford University</li>
+            <li>BA in Comparative Studies in Race and Ethnicity, Stanford University</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-inner">
+    <span class="section-label">Selected Work</span>
+    <h2 class="section-heading">What I've built and learned</h2>
+    <div class="section-rule"></div>
+    <div class="work-grid">
+
+      <div class="work-card">
+        <span class="card-eyebrow">Organizational Strategy · Stanford FLAN</span>
+        <h3>Building Systems for a Growing National Organization</h3>
+        <p>As Co-President of Stanford's First-Generation and Low-Income Alumni Network, led strategic planning, governance, and operations for a 2,000+ member national organization. Revised and updated the organization's bylaws and developed standing rules to supplement them. Redesigned the needs assessment process from scratch — focusing on social science rigor and data quality — then worked persistently through board retreats and strategic planning sessions to ensure members actually engaged with the findings and translated them into organizational goals. Secured $20K in funding, built consistent grant evaluation procedures, and led large-scale programming and stakeholder partnerships across the Stanford alumni and student ecosystem.</p>
+      </div>
+
+      <div class="work-card">
+        <span class="card-eyebrow">Program Design · Stanford University</span>
+        <h3>Founding Stanford's First Generation Program</h3>
+        <p>Founded and piloted the institutional program that became Stanford's First-Generation and Low-Income Student Success Center. Conducted surveys, focus groups, peer-institution benchmarking, and social-belonging research to identify the specific barriers affecting students' academic transitions, financial navigation, and sense of belonging. Synthesized findings into a 100+ page report for university leadership and developed programming — including a week-long orientation — later adopted by peer institutions.</p>
+      </div>
+
+      <div class="work-card">
+        <span class="card-eyebrow">Research & Analysis · Harvard, Tufts & Wisconsin</span>
+        <h3>Social Mobility, Stress, and Health</h3>
+        <p>Examined whether and for whom upward mobility actually improves health — with particular attention to the groups and contexts where the expected benefits don't materialize or come at a cost. Drawing on Add Health, the Health and Retirement Study, and the Wisconsin Longitudinal Study, this work investigates how race, sex, and class origins moderate the relationship between mobility and psychological distress; how psychosocial stressors mediate those effects; and how the university setting itself shapes health disparities among those who traveled farthest to get there. Received 11 grants totaling over $200,000, including the NSF Graduate Research Fellowship.</p>
+      </div>
+
+      <div class="work-card">
+        <span class="card-eyebrow">Research Operations · Stanford / IES</span>
+        <h3>Managing a National College Access Study</h3>
+        <p>Led research operations for a large-scale randomized intervention designed to improve selective college enrollment among high-achieving, low-income students. Managed a team of up to 16 staff across intervention design, survey administration, data systems, and grant compliance. Oversaw three simultaneous national surveys, managed $6M+ in funding from IES, Gates, Spencer, and Smith Richardson foundations, and rebuilt major survey and tracking operations in-house when a $1.1M vendor contract was discontinued mid-project.</p>
+      </div>
+
+      <div class="work-card">
+        <span class="card-eyebrow">Data Science · University of Chicago</span>
+        <h3>Early Warning Models for High School Graduation</h3>
+        <p>As a Data Science for Social Good Fellow, developed a machine learning framework with four U.S. school districts to identify students at risk of not graduating on time. Built interpretable models using up to 16 years of longitudinal student data, with a deliberate focus on actionable risk categories rather than demographic proxies — so that interventions could target individual needs rather than group membership. Designed a generalizable pipeline in SQL and Python for cross-district analysis and temporal model validation. Presented at Bloomberg's Data for Good Exchange.</p>
+      </div>
+
+      <div class="work-card">
+        <span class="card-eyebrow">Teaching & Philanthropy · Harvard University</span>
+        <h3>Nonprofit Evaluation and Philanthropic Decision-Making</h3>
+        <p>As an instructor for Harvard's General Education course on philanthropy and the nonprofit sector, worked most directly with students on the applied components: evaluating nonprofit organizations, assessing theories of change and evidence bases, and making funding recommendations through the Philanthropy Lab. Guided student teams from problem identification through lean canvas development, nonprofit selection, and final funding pitches. Also taught and facilitated applied learning in Psychology courses on well-being and social impact, and served as Head Teaching Fellow for courses in Psychology and Sociology enrolling up to 450 students.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MENTORSHIP -->
+<section id="mentorship">
+  <div class="section-inner">
+    <span class="section-label">Mentorship</span>
+    <h2 class="section-heading">Research Mentorship & Advising</h2>
+    <div class="section-rule"></div>
+    <p style="color:var(--slate); max-width:700px; margin-bottom:2.4rem; font-size:0.95rem; line-height:1.8;">Alongside my own research and organizational work, I've maintained a sustained practice of guiding others through the research process — from question development through data collection, analysis, writing, and publication or presentation. This spans independent student research projects, undergraduate honors theses, and cross-disciplinary writing and methods advising across career stages. The projects belong to the people I work with; the intellectual work we do together is real.</p>
+    <div class="mentorship-grid">
+      <div class="mentorship-block">
+        <h3>Research Mentorship</h3>
+        <p>I've guided more than 44 students through full independent research cycles — from initial question through final paper — through Lumiere Education, Polygence, and independent advising, in addition to hundreds of students through research writing in course contexts. Many independent mentees have gone on to publish or present their work. Projects have ranged across the social sciences, including work on mental health access and district socioeconomic inequality, cultural responses to autism across societies, identity and belonging in online communities, stress and burnout across professional contexts, and career aspirations among young people navigating gender and cultural constraints. I've also served as primary advisor for Harvard College senior honors theses, prepared students for conference presentations, and evaluated theses as a departmental reader.</p>
+      </div>
+      <div class="mentorship-block">
+        <h3>Methods & Writing Advising</h3>
+        <p>Across departments and career stages, I've advised researchers and writers on research design, quantitative and qualitative methods, literature review development, argument structure, and substantive revision — working with undergraduates, graduate students, and midcareer professionals through courses, individual consultations, and the Harvard writing advising infrastructure. A mentoring document I co-developed through Harvard's Advising Project working group was adopted by the Graduate School of Arts and Sciences and peer institutions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="section-inner">
+    <span class="section-label">Expertise</span>
+    <h2 class="section-heading">Where I can add the most value</h2>
+    <div class="section-rule"></div>
+    <div class="expertise-featured">
+      <h3>Heterogeneity & Unintended Consequences</h3>
+      <p>Most programs work for some people under some conditions — and don't for others. I specialize in identifying where effects diverge from expectations: which subpopulations are underserved, where programs produce unintended consequences, and what those patterns mean for how resources and decisions should be structured. This is the lens I bring to evaluation, research design, and strategy work.</p>
+    </div>
+    <div class="expertise-grid">
+      <div class="expertise-item">
+        <h3>Program Evaluation</h3>
+        <p>Designing and conducting rigorous evaluations that go beyond average effects — examining heterogeneity, unintended consequences, and the conditions under which programs work or fall short for different populations. Comfortable with experimental, quasi-experimental, and mixed-methods designs.</p>
+      </div>
+      <div class="expertise-item">
+        <h3>Philanthropic Strategy & Grantmaking</h3>
+        <p>Applying evidence to funding decisions: assessing organizational capacity and program theory, building evaluation frameworks that are both rigorous and practical, and using findings to improve — not just judge — the work being funded.</p>
+      </div>
+      <div class="expertise-item">
+        <h3>Research Design & Analysis</h3>
+        <p>Translating complex, real-world questions into answerable research designs. Skilled across a wide range of quantitative methods — longitudinal modeling, multilevel analysis, mediation and moderation, spatial analysis, and machine learning — as well as qualitative methods including focus groups, cognitive interviewing, and inductive and deductive research design.</p>
+      </div>
+      <div class="expertise-item">
+        <h3>Organizational Strategy</h3>
+        <p>Helping organizations understand what their evidence is actually telling them — and building the systems, processes, and decision frameworks needed to act on it. Experienced across higher education, philanthropy, nonprofits, and research organizations.</p>
+      </div>
+      <div class="expertise-item">
+        <h3>Project & Operations Leadership</h3>
+        <p>Managing complex, multi-stakeholder projects under real constraints. Experience building teams, overseeing large budgets, running multi-site national surveys, and rebuilding operational systems mid-project when plans change.</p>
+      </div>
+      <div class="expertise-item">
+        <h3>Building Research Capacity</h3>
+        <p>Developing analytical capability in others — whether guiding a student through their first independent research project, advising a team on study design, or building the evaluation infrastructure an organization needs to learn from its own work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-inner">
+    <span class="section-label">Research</span>
+    <h2 class="section-heading">Selected publications & presentations</h2>
+    <div class="section-rule"></div>
+
+    <div class="research-cluster">
+      <h3 class="research-cluster-heading">Mobility, Stress & Health</h3>
+      <p class="research-cluster-intro">A sustained research program examining whether and for whom upward mobility improves health — and where it doesn't. This work takes seriously that the average effect of mobility on health is not the whole story: race, sex, class origins, and institutional context all moderate who benefits, who bears hidden costs, and why. Dissertation in progress.</p>
+      <div class="pub-list">
+        <div class="pub-item">
+          <p>Upward intergenerational mobility and psychological distress in the United States</p>
+          <span class="pub-venue">Presented at the American Sociological Association Annual Meeting</span>
+        </div>
+        <div class="pub-item">
+          <p>Lived experiences of allostatic load: Upward mobility and health among adults in elite graduate programs</p>
+          <span class="pub-venue">Draft in progress</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="research-cluster">
+      <h3 class="research-cluster-heading">Aging, Adversity & Well-being</h3>
+      <p class="research-cluster-intro">Collaborative research with Adolfo Cuevas (NYU) examining how psychosocial stressors, childhood adversity, and educational mobility shape health outcomes in middle-aged and older adults.</p>
+      <div class="pub-list">
+        <div class="pub-item">
+          <p>Educational mobility and telomere length in middle-aged and older adults: Testing three alternative hypotheses</p>
+          <span class="pub-venue">Biodemography and Social Biology</span>
+        </div>
+        <div class="pub-item">
+          <p>Longitudinal analysis of psychosocial stressors and body mass index in middle-aged and older adults in the United States</p>
+          <span class="pub-venue">The Journals of Gerontology: Series B</span>
+        </div>
+        <div class="pub-item">
+          <p>Cumulative stress effects of childhood adversity</p>
+          <span class="pub-venue">Presented at the Population Association of America Annual Meeting</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="research-cluster">
+      <h3 class="research-cluster-heading">Educational Opportunity</h3>
+      <div class="pub-list">
+        <div class="pub-item">
+          <p>A data-driven framework for identifying high school students at risk of not graduating on time</p>
+          <span class="pub-venue">Bloomberg Data for Good Exchange, 2015 · With Reid A. Johnson, Ruobin Gong, Anushka Anand, and Alan Fritzler</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <span class="section-label">Contact</span>
+    <h2 class="section-heading">Let's talk</h2>
+    <div class="section-rule"></div>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-body">
+          <p>I'm looking for roles where I can put rigorous analysis to work on problems that matter — in an organization where varied, collaborative work is the norm rather than the exception. I'm particularly drawn to philanthropy, impact-focused research, and education or social policy, where evidence is taken seriously and used to actually change how things are done.</p>
+          <p>I'm also available for consulting engagements in program evaluation and research design. For roles in higher education, advising, and student success, see my <a href="siobhan-highered.html">higher education profile</a>.</p>
+          <p>The best way to reach me is by email.</p>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:siobhan.greatorexvoith@gmail.com" class="contact-link">
+            <span class="contact-link-icon">✉</span>
+            siobhan.greatorexvoith@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/siobhangreatorex" class="contact-link" target="_blank">
+            <span class="contact-link-icon" style="font-weight:700; font-size:0.75rem;">in</span>
+            linkedin.com/in/siobhangreatorex
+          </a>
+        </div>
+      </div>
+      <div class="open-to">
+        <span class="open-to-label">Currently open to</span>
+        <div class="open-to-item"><span class="open-to-dot"></span>Philanthropic strategy, grantmaking, and impact evaluation roles</div>
+        <div class="open-to-item"><span class="open-to-dot"></span>Applied research and evaluation in education, health, or social policy</div>
+        <div class="open-to-item"><span class="open-to-dot"></span>Organizational strategy and learning roles in mission-driven organizations</div>
+        <div class="open-to-item"><span class="open-to-dot"></span>Program evaluation and research design consulting engagements</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Siobhan Greatorex-Voith &nbsp;·&nbsp; Cambridge, MA</p>
+</footer>
+
+</body>
+</html>
